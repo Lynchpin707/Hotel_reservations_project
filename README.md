@@ -5,16 +5,6 @@
 While building this project, my main focus was not the model itself, but all the engineering behind it. I wanted to build a reproducible and orchestrated ML pipeline.
 
 ## Tech stack
-
-<center>
-    <img src="docs/Python-logo.png" alt="The pipeline architecture on ZenML" width="100"/>
-    <img src="docs/pandas_logo.png" alt="The pipeline architecture on ZenML" width="100"/>
-    <img src="docs/zenML_logo.jpeg" alt="The pipeline architecture on ZenML" width="100"/>
-    <img src="docs/Git_logo.png" alt="The pipeline architecture on ZenML" width="100"/>
-
-</center>
-
-
 - **Python** for core development and in association with :
     - **ZenML** as the orchestration backbone of the project.
     - **Pandas** and **NumPy** for data manipulation and numerical processing.
@@ -73,7 +63,5 @@ ZenML will then provide you with a dashboard you can visualise on your local mac
 
 ## Ressources:
 - ["How to write software documentation"](https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/) : An article that helped me figure out how to write good documentation for my engineering projects.
-
 - [freeCodeCamp MLOps Course](https://www.youtube.com/watch?v=-dJPoLm_gtE) : A very nice course to learn and practice applying DevOps principles to machine learning.
-
 - [Kaggle Hotel Reservations Dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset) : The main data source.
