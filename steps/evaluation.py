@@ -1,14 +1,20 @@
 import logging
 import pandas as pd
-
+import mlflow
 from zenml import step
+from zenml.client import Client
+
+
 
 from sklearn.linear_model._logistic import LogisticRegression
 from src.evaluation import AccuracyScore, F1Score, CrossEntropyLoss 
 from typing import Tuple
 from typing_extensions import Annotated
 
-@step 
+experiment_tracker = Client().active_stack.experiment_tracker
+
+
+@step(experiment_tracker=experiment_tracker.name)
 def evaluate_model(
     model: LogisticRegression,
     X_test: pd.DataFrame,
@@ -36,11 +42,12 @@ def evaluate_model(
         
         accuracy_class = AccuracyScore()
         accuracy = accuracy_class.calculate_scores(y_test, prediction)
-        
+        mlflow.log_metric("Accuracy score", accuracy)
         f1_class = F1Score()
         f1_score = f1_class.calculate_scores(y_test, prediction)
+        mlflow.log_metric("F1 score", f1_score)
+        return accuracy, f1_score
     except Exception as e:
         logging.error("Error occured during model evaluation: {}".format(e))
         raise e
     
-    return accuracy, f1_score
