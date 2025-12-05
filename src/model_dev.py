@@ -26,7 +26,7 @@ class LogisticRegressionModel(Model):
         """
         try:
             
-            logisticreg = LogisticRegression(**kwargs) 
+            logisticreg = LogisticRegression(max_iter=1000, **kwargs) 
             logisticreg.fit(X_train, y_train)
             logging.info("Model training completed")
             return logisticreg

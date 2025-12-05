@@ -16,8 +16,8 @@ experiment_tracker = Client().active_stack.experiment_tracker
 def train_model(
     X_train: pd.DataFrame,
     X_test: pd.DataFrame,
-    y_train: pd.DataFrame,
-    y_test: pd.DataFrame,
+    y_train: pd.Series,
+    y_test: pd.Series,
     config: str
     ) -> LogisticRegression:
     """Trains the model on the ingested data
@@ -25,8 +25,8 @@ def train_model(
     Args:
         X_train (pd.DataFrame)
         X_test (pd.DataFrame)
-        y_train (pd.DataFrame)
-        y_test (pd.DataFrame)
+        y_train (pd.Series)
+        y_test (pd.Series)
 
     Returns:
         RegressorMixin: the trained model

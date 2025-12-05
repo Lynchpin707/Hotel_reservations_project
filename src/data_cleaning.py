@@ -35,7 +35,12 @@ class DataPreProcessStrategy(DataStrategy):
             
             data["booking_status"] = data["booking_status"].map({"Not_Canceled":0, "Canceled":1})
             
-            data = data.drop(columns=['market_segment_type_Aviation', 'arrival_month', 'arrival_date'])
+            data = data.drop(
+                columns=['market_segment_type_Aviation', 'arrival_month', 'arrival_date', 'Booking_ID' ],
+                errors='ignore' 
+            )
+            
+            data = data.astype(float)
             
             return data
         except Exception as e:

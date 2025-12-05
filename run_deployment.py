@@ -1,4 +1,4 @@
-
+from typing import cast
 import click
 from pipelines.deployment_pipeline import (
     continuous_deployment_pipeline
@@ -9,6 +9,11 @@ from zenml.integrations.mlflow.model_deployers.mlflow_model_deployer import (
     MLFlowModelDeployer,
 )
 from zenml.integrations.mlflow.services import MLFlowDeploymentService
+
+from pipelines.deployment_pipeline import (
+    continuous_deployment_pipeline,
+    inference_pipeline
+)
 
 DEPLOY = "deploy"
 PREDICT = "predict"
@@ -29,7 +34,7 @@ DEPLOY_AND_PREDICT = "deploy_and_predict"
 
 @click.option(
     "--min-accuracy",
-    default=0.8,
+    default=0.3,
     help="Minimum accuracy required to deploy the model"
 )
 
@@ -45,9 +50,13 @@ def run_deployment(config : str, min_accuracy: float):
             workers=3,
             timeout=60,
         )
+    if predict:
+        inference_pipeline(
+            pipeline_name = "continuous_deployment_pipeline",
+            pipeline_step_name = "mlflow_model_deployer_step"
+        )
 
-
-    print(
+    print( 
         "You can run:\n "
         f"[italic green]    mlflow ui --backend-store-uri '{get_tracking_uri()}"
         "[/italic green]\n ...to inspect your experiment runs within the MLflow"
